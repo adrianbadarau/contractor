@@ -13,3 +13,13 @@ Router.route('home',{
 
     }
 });
+
+Router.route('about',{
+    path:"/about",
+    template:'about'
+});
+
+Router.route('contact',{
+    path:"/contact",
+    template:'contact'
+});
