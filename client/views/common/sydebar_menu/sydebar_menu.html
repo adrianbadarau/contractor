@@ -1,0 +1,12 @@
+<template name="sydebar_menu">
+    <ul class="nav nav-pills nav-stacked">
+        {{#if loggingIn}}
+        <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li><a href="#"><i class="fa fa-list-alt fa-fw"></i>Contracts</a></li>
+        <li><a href="#"><i class="fa fa-file-o fa-fw"></i>Templates</a></li>
+        <li><a href="#"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>
+        {{else}}
+            {{> loginButtons }}
+        {{/if}}
+    </ul>
+</template>

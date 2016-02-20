@@ -1,3 +1,7 @@
 <template name="home">
+    {{#if loggingIn}}
     <h1>You have reached the HomePage</h1>
+    {{else}}
+        <h3>Please Sign In / Register to be able to use the application</h3>
+    {{/if}}
 </template>

@@ -30,3 +30,6 @@ npm-container
 iron:router
 twbs:bootstrap
 fortawesome:fontawesome
+
+accounts-password
+accounts-ui
