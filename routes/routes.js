@@ -5,3 +5,11 @@
 Router.configure({
     layoutTemplate:'main'
 });
+
+Router.route('home',{
+    path:"/",
+    template:'home',
+    data:function(){
+
+    }
+});
