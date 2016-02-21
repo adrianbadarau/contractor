@@ -1,6 +1,10 @@
 /**
  * Created by adrianbadarau on 21/02/16.
  */
+Template.contracts_manage_form.onCreated(function(){
+    this.data.ocr_text = new ReactiveVar('');
+});
+
 Template.contracts_manage_form.helpers({
     form_title: function () {
         return Template.parentData().title
@@ -10,6 +14,9 @@ Template.contracts_manage_form.helpers({
     },
     is_able_to_process: function () {
         return Session.get("last_uploaded_file");
+    },
+    contract_text : function(){
+        return this.ocr_text.get();
     }
 });
 
@@ -37,6 +44,7 @@ Template.contracts_manage_form.events({
                         Meteor.call("process_pdf", img_to_prcess, function (err, rez) {
                             console.log(rez);
                             Session.set("OCRR", rez);
+                            template.data.ocr_text.set('<pre id="contract_text">'+ rez +'</pre>');
                         })
                     }
                 });
