@@ -1,11 +1,15 @@
 <template name="contracts_manage_form">
         {{#if is_create}}
         <div class="row">
+            {{#if is_able_to_process}}
+                <button class="btn btn-lg btn-info pull-right" id="process_image">Process Image</button>
+            {{else}}
             <div class="full-width">
                 <input type="file" id="file_upload" class="form-control form-input form-style-base">
                 <input type="text" id="fake-input" class="form-control form-input form-style-fake" placeholder="Please Upload a file first" readonly>
                 <span class="glyphicon glyphicon-open input-place"></span>
             </div>
+            {{/if}}
         </div>
         {{/if}}
         <form action="#" method="post" role="form">

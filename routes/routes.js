@@ -39,6 +39,9 @@ Router.route('sign_in',{
 Router.route('contracts_create',{
     path:'/contracts/',
     template:'contracts_manage',
+    subscriptions: function () {
+        this.subscribe('files');
+    },
     data: function () {
         return {
             title:"Create new Contract",
