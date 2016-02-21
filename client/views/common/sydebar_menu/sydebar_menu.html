@@ -2,8 +2,8 @@
     <ul class="nav nav-pills nav-stacked">
         {{#if currentUser }}
         <li class="active"><a href="{{pathFor 'home'}}"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li><a href="#"><i class="fa fa-list-alt fa-fw"></i>Contracts</a></li>
-        <li><a href="#"><i class="fa fa-file-o fa-fw"></i>Templates</a></li>
+        <li><a href="{{pathFor 'contracts_index'}}"><i class="fa fa-list-alt fa-fw"></i>Contracts</a></li>
+        <li><a href="{{pathFor 'contract_templates'}}"><i class="fa fa-file-o fa-fw"></i>Templates</a></li>
         <li><a href="#"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>
         <li><a href="#" id="sign_out"><i class="fa fa-sign-out fa-fw"></i>Sign out</a></li>
         {{else}}

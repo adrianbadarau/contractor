@@ -7,12 +7,6 @@ Template.contracts_manage_form.onCreated(function(){
 });
 
 Template.contracts_manage_form.helpers({
-    form_title: function () {
-        return Template.parentData().title
-    },
-    is_create: function () {
-        return Template.parentData().type === 'create';
-    },
     is_able_to_process: function () {
         return Session.get("last_uploaded_file");
     },

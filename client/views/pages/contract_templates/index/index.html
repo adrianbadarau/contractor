@@ -1,0 +1,23 @@
+<template name="contract_templates_index">
+    <div class="row">
+        <a href="{{ pathFor 'contract_templates_create'}}" class="btn btn-primary btn-xs pull-left"><b>+</b> Add new Contract Template</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Last Update</th>
+                <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            {{#each contract_templates}}
+                <tr>
+                    <td>{{nr}}</td>
+                    <td>{{updated_at}}</td>
+                    <td class="text-center">
+                        <a class='btn btn-info btn-xs' href="{{pathFor 'contract_templates_edit'}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+</template>

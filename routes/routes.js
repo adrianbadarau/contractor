@@ -3,68 +3,100 @@
  */
 
 Router.configure({
-    layoutTemplate:'main'
+    layoutTemplate: 'main'
 });
 
-Router.route('home',{
-    path:"/",
-    template:'home',
+Router.route('home', {
+    path: "/",
+    template: 'home',
     subscriptions: function () {
         this.subscribe('contracts');
     },
     data: function () {
-        var contracts = Contracts.find();
-        var templateData = {
-            contracts : contracts
-        };
-        return templateData;
     }
 });
 
-Router.route('about',{
-    path:"/about",
-    template:'about'
+Router.route('about', {
+    path: "/about",
+    template: 'about'
 });
 
-Router.route('contact',{
-    path:"/contact",
-    template:'contact'
+Router.route('contact', {
+    path: "/contact",
+    template: 'contact'
 });
 
-Router.route('sign_in',{
-    path:'sign-in',
+Router.route('sign_in', {
+    path: 'sign-in',
     template: 'sign_in'
 });
 
-Router.route('contracts_create',{
-    path:'/contracts/',
-    template:'contracts_manage',
+Router.route('contracts_index', {
+    path: "/contracts/",
+    template: "contracts_index",
+    subscriptions: function () {
+        this.subscribe('contracts')
+    },
+    data: function () {
+        return {
+            contracts: Contracts.find({})
+        }
+    }
+});
+
+Router.route('contracts_create', {
+    path: '/contracts/create',
+    template: 'contracts_manage',
     subscriptions: function () {
         this.subscribe('files');
     },
     data: function () {
         return {
-            title:"Create new Contract",
-            type:"create"
+            title: "Create new Contract",
+            type: "create"
         }
     }
 });
 
-Router.route('contracts_edit',{
-    path:"/contracts/:_id/edit",
-    template:'contracts_manage',
+Router.route('contracts_edit', {
+    path: "/contracts/:_id/edit",
+    template: 'contracts_manage',
     subscriptions: function () {
         this.subscribe('contracts').wait();
         this.subscribe('files').wait();
     },
-    data: function(){
-        var contract = Contracts.findOne({_id:this.params._id});
-        var file = Files.findOne({_id:contract.file_id});
-        return{
-            title:"Edit Contract",
+    data: function () {
+        var contract = Contracts.findOne({_id: this.params._id});
+        var file = Files.findOne({_id: contract.file_id});
+        return {
+            title: "Edit Contract",
             type: "Edit",
             contract: contract,
             file: file
+        }
+    }
+});
+
+Router.route('contract_templates', {
+    path: '/contract_templates/',
+    template: 'contract_templates_index',
+    subscriptions: function () {
+        this.subscribe('contract_templates').wait();
+    },
+    data: function () {
+        return {
+            contract_templates: ContractTemplates.find({})
+        }
+    }
+});
+
+Router.route('contract_templates_create', {
+    path: "/contract_templates/create",
+    template: "contract_templates_manage",
+    data: function () {
+        return {
+            title: 'Create New Contract Template',
+            type: 'create'
         }
     }
 });
