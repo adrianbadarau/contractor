@@ -9,8 +9,15 @@ Router.configure({
 Router.route('home',{
     path:"/",
     template:'home',
-    data:function(){
-
+    subscriptions: function () {
+        this.subscribe('contracts');
+    },
+    data: function () {
+        var contracts = Contracts.find();
+        var templateData = {
+            contracts : contracts
+        };
+        return templateData;
     }
 });
 
@@ -27,4 +34,15 @@ Router.route('contact',{
 Router.route('sign_in',{
     path:'sign-in',
     template: 'sign_in'
+});
+
+Router.route('contracts_create',{
+    path:'/contracts/',
+    template:'contracts_manage',
+    data: function () {
+        return {
+            title:"Create new Contract",
+            type:"create"
+        }
+    }
 });

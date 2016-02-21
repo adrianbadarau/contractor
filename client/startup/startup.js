@@ -8,20 +8,4 @@ Meteor.startup(function () {
         }
         Session.set('uploads_path', rez);
     });
-    FS.HTTP.setBaseUrl('/uploads');
-    AccountsTemplates.configure({
-        onLogOutHook: Router.go('home'),
-        onSubmitHook: function (error, state) {
-            if (!error) {
-                if (state === "signIn") {
-                    // Successfully logged in
-                    Router.go('home');
-                }
-                if (state === "signUp") {
-                    // Successfully registered
-                    Router.go('home');
-                }
-            }
-        }
-    });
 });

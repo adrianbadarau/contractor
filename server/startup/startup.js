@@ -4,7 +4,6 @@
 Meteor.startup(function () {
     exec = Npm.require("child_process").exec;
     root_path = process.env.PWD;
-    FS.HTTP.setBaseUrl('/uploads');
 
     if(Meteor.users.find({profile:{userType: 'admin'}}).count() === 0){
         Accounts.createUser({

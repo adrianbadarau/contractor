@@ -7,3 +7,21 @@ Template.sydebar_menu.events({
         AccountsTemplates.logout();
     }
 });
+
+AccountsTemplates.configure({
+    onLogoutHook: function(){
+        Router.go('/');
+    },
+    onSubmitHook: function (error, state) {
+        if (!error) {
+            if (state === "signIn") {
+                // Successfully logged in
+                Router.go('/');
+            }
+            if (state === "signUp") {
+                // Successfully registered
+                Router.go('/');
+            }
+        }
+    }
+});

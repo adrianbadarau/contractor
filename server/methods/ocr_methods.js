@@ -6,6 +6,6 @@ Meteor.methods({
         return root_path;
     },
     get_uploads_dir: function () {
-        return root_path+"/public/uploads/files"
+        return root_path+"/.meteor/local/cfs/files/files/"
     }
 });
