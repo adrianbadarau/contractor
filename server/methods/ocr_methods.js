@@ -13,7 +13,7 @@ Meteor.methods({
         console.log("SERVER: ", file_path);
         var txt = Async.runSync(function (done) {
             options = {
-                binary: '/usr/local/bin/tesseract'
+                binary: Meteor.settings.ocr_bin
             };
             tesseract.process(file_path, options, function (err, text) {
                 if (err) {
