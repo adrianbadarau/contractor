@@ -1,7 +1,7 @@
 <template name="home">
-    {{#if loggingIn}}
+    {{#if currentUser}}
     <h1>You have reached the HomePage</h1>
     {{else}}
-        <h3>Please Sign In / Register to be able to use the application</h3>
+        <h3>Please <a href="{{ pathFor 'sign_in' }}">Sign In / Register</a> to be able to use the application</h3>
     {{/if}}
 </template>

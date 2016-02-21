@@ -23,3 +23,8 @@ Router.route('contact',{
     path:"/contact",
     template:'contact'
 });
+
+Router.route('sign_in',{
+    path:'sign-in',
+    template: 'sign_in'
+});

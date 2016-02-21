@@ -32,4 +32,6 @@ twbs:bootstrap
 fortawesome:fontawesome
 
 accounts-password
-accounts-ui
+
+useraccounts:core
+useraccounts:bootstrap
