@@ -3,6 +3,7 @@
  */
 Template.contracts_manage_form.onCreated(function(){
     this.data.ocr_text = new ReactiveVar('');
+    this.data.can_save = new ReactiveVar(0);
 });
 
 Template.contracts_manage_form.helpers({
@@ -17,6 +18,9 @@ Template.contracts_manage_form.helpers({
     },
     contract_text : function(){
         return this.ocr_text.get();
+    },
+    can_save : function(){
+        return !this.can_save.get();
     }
 });
 
@@ -40,15 +44,31 @@ Template.contracts_manage_form.events({
                 var img_to_prcess = rez;
                 Meteor.call("delete_old_img", pdf_url, function(err, rez){
                     console.log("Delet img: ",err, rez);
+                    Meteor.call("update_file_path",Session.get("last_uploaded_file"), file.copies.files.key.slice(0,-3)+"tif", function(err,rez){console.log(err, rez)});
                     if(rez){
                         Meteor.call("process_pdf", img_to_prcess, function (err, rez) {
                             console.log(rez);
                             Session.set("OCRR", rez);
                             template.data.ocr_text.set('<pre id="contract_text">'+ rez +'</pre>');
+                            template.data.can_save.set(1);
                         })
                     }
                 });
             }
         });
+    },
+    'submit #contract_create_form' : function(event, template){
+        event.preventDefault();
+        var contract = {
+            nr: $("#c_number").val(),
+            client: $("#c_client").val(),
+            expiration_date: $('#c_expiration_date').val(),
+            text: $("#contract_text").text()
+        };
+        Meteor.call("create_contract",contract,function(err, rez){
+            if(! err ){
+                Router.go("/")
+            }
+        })
     }
 });
