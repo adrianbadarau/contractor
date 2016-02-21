@@ -15,6 +15,7 @@ Meteor.startup(function () {
                 userType: 'admin'
             }
         });
+
         Accounts.createUser({
             password: 'admin',
             email: 'staff@staff',
