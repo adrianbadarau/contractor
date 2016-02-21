@@ -70,7 +70,7 @@ Router.route('contracts_edit', {
         var file = Files.findOne({_id: contract.file_id});
         return {
             title: "Edit Contract",
-            type: "Edit",
+            type: "edit",
             contract: contract,
             file: file
         }
@@ -97,6 +97,22 @@ Router.route('contract_templates_create', {
         return {
             title: 'Create New Contract Template',
             type: 'create'
+        }
+    }
+});
+
+Router.route('contract_templates_edit',{
+    name:'contract_templates_edit',
+    path:"/contract_templates/:_id/edit",
+    template:'contract_templates_manage',
+    subscriptions: function () {
+        this.subscribe('contract_templates').wait();
+    },
+    data: function () {
+        return{
+            title: 'Edit Contract Template',
+            type: 'edit',
+            contract_template: ContractTemplates.findOne({_id: this.params._id})
         }
     }
 });
