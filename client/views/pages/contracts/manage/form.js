@@ -38,24 +38,12 @@ Template.contracts_manage_form.events({
         event.preventDefault();
         var file = Files.findOne({_id: Session.get("last_uploaded_file")});
         var pdf_url = Session.get('uploads_path') + file.copies.files.key;
-        Meteor.call("process_img", pdf_url, function(err, rez){
+        Meteor.call("process_file",pdf_url,function(err, rez){
             console.log(err, rez);
-            if(rez){
-                var img_to_prcess = rez;
-                Meteor.call("delete_old_img", pdf_url, function(err, rez){
-                    console.log("Delet img: ",err, rez);
-                    Meteor.call("update_file_path",Session.get("last_uploaded_file"), file.copies.files.key.slice(0,-3)+"tif", function(err,rez){console.log(err, rez)});
-                    if(rez){
-                        Meteor.call("process_pdf", img_to_prcess, function (err, rez) {
-                            console.log(rez);
-                            Session.set("OCRR", rez);
-                            template.data.ocr_text.set('<pre id="contract_text">'+ rez +'</pre>');
-                            template.data.can_save.set(1);
-                        })
-                    }
-                });
-            }
+            template.data.ocr_text.set('<pre id="contract_text">' + rez + '</pre>');
+            template.data.can_save.set(1);
         });
+
     },
     'submit #contract_create_form' : function(event, template){
         event.preventDefault();
@@ -70,5 +58,12 @@ Template.contracts_manage_form.events({
                 Router.go("/")
             }
         })
+    },
+    'click .choose_type_btn': function (event, template) {
+        event.preventDefault();
+        var $this = $(event.target);
+        this.document_type.set($this.data('type'));
+        console.log($this.data('type'), this.document_type);
+        Session.set("new_page",0);
     }
 });

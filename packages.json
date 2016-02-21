@@ -1,3 +1,4 @@
 {
-    "node-tesseract": "0.2.7"
+    "node-tesseract": "0.2.7",
+    "textract":"1.2.1"
 }
