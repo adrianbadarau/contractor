@@ -14,5 +14,8 @@ Files.allow({
     },
     remove: function (userId, doc) {
         return userId
+    },
+    download:function(){
+        return true;
     }
 });

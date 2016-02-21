@@ -19,7 +19,7 @@ Template.contracts_manage_form.helpers({
     contract_text : function(){
         return this.ocr_text.get();
     },
-    can_save : function(){
+    cant_save : function(){
         return !this.can_save.get();
     }
 });
@@ -51,10 +51,13 @@ Template.contracts_manage_form.events({
             nr: $("#c_number").val(),
             client: $("#c_client").val(),
             expiration_date: $('#c_expiration_date').val(),
-            text: $("#contract_text").text()
+            text: $("#contract_text").text(),
+            file_id: Session.get("last_uploaded_file")
         };
         Meteor.call("create_contract",contract,function(err, rez){
             if(! err ){
+                delete Session.keys.last_uploaded_file;
+                delete Session.keys.OCCR;
                 Router.go("/")
             }
         })

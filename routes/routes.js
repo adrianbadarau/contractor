@@ -49,3 +49,22 @@ Router.route('contracts_create',{
         }
     }
 });
+
+Router.route('contracts_edit',{
+    path:"/contracts/:_id/edit",
+    template:'contracts_manage',
+    subscriptions: function () {
+        this.subscribe('contracts').wait();
+        this.subscribe('files').wait();
+    },
+    data: function(){
+        var contract = Contracts.findOne({_id:this.params._id});
+        var file = Files.findOne({_id:contract.file_id});
+        return{
+            title:"Edit Contract",
+            type: "Edit",
+            contract: contract,
+            file: file
+        }
+    }
+});
