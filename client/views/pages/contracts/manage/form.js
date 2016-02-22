@@ -36,8 +36,19 @@ Template.contracts_manage_form.events({
             console.log(err, rez);
             template.data.ocr_text.set('<pre id="contract_text">' + rez + '</pre>');
             template.data.can_save.set(1);
+            var tep_id = Session.get('selected_template');
+            if( tep_id!== 'undefined'){
+                var ctnr = getPosition(tep_id,rez,'ctr_nr_field');
+                Session.set('ctnr',ctnr);
+                $('#c_number').val(ctnr);
+                var ctclf = getPosition(tep_id,rez,'ctr_client_field');
+                Session.set('ctclf',ctclf);
+                $('#c_client').val(ctclf);
+                var ctexp = getPosition(tep_id,rez,'ctr_expiration_date_field');
+                Session.set('ctexp',ctexp);
+                $('#c_expiration_date').val(ctexp);
+            }
         });
-
     },
     'submit #contract_create_form' : function(event, template){
         event.preventDefault();
@@ -64,3 +75,21 @@ Template.contracts_manage_form.events({
         Session.set("new_page",0);
     }
 });
+
+function getPosition(template_id, string, field_name){
+    var c_template = ContractTemplates.findOne({_id:template_id});
+    var nr_poz = string.indexOf(c_template[field_name])+c_template[field_name].length;
+    console.log("Position",nr_poz);
+    var c_t_nr = '';
+    var max_nl = 0;
+    for(var i= nr_poz; i< string.length;i++){
+        if(max_nl > 1){
+            break;
+        }
+        if(string[i] == "\n"){
+            max_nl++;
+        }
+        c_t_nr+=string[i];
+    }
+    return c_t_nr;
+}

@@ -39,6 +39,7 @@
             <pre>{{ contract.text }}</pre>
                 <a href="" target="_blank"><img src="{{file.url}}" alt="" class="thumbnail" /></a>
         {{else}}
+            <p>Use template {{> select_contract_templates }} to search</p>
             {{{ contract_text }}}
         {{/if}}
     </div>

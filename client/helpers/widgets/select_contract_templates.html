@@ -1,0 +1,8 @@
+<template name="select_contract_templates">
+    <select name="contract_templates" id="contract_templates_select">
+        <option value="none">Select A Template</option>
+        {{#each ctr_templates}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</template>
