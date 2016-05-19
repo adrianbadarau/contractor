@@ -10,3 +10,7 @@ After the upload the application matches the selected template rules to the text
 the contract form.
 
 @TODO add dashboard with notifications for contracts that have to be renewed
+
+- Implement Dropbox API
+- Implement Google Drive API
+- Document the installation process of the tesseract ocr
